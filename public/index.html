@@ -1,0 +1,412 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f6f7f9" />
+  <meta name="description" content="TeamPilot AI project coordination dashboard" />
+
+  <title>TeamPilot AI · Project overview</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="/styles.css" />
+  <script src="/app.js" defer></script>
+</head>
+
+<body>
+  <div class="app-shell">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#overview" aria-label="TeamPilot home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32">
+            <path d="M16 3.5 28 10v12L16 28.5 4 22V10L16 3.5Z" />
+            <path d="m10.5 16 3.5 3.5 7.5-8" />
+          </svg>
+        </span>
+
+        <span class="brand-name">
+          team<span>pilot</span>
+          <small>AI PROJECT COORDINATOR</small>
+        </span>
+      </a>
+
+      <div class="workspace-label">WORKSPACE</div>
+
+      <nav class="nav-list">
+        <a class="nav-link active" href="#overview" aria-current="page">
+          <svg viewBox="0 0 24 24">
+            <rect x="3.5" y="3.5" width="7" height="7" rx="1.5" />
+            <rect x="13.5" y="3.5" width="7" height="7" rx="1.5" />
+            <rect x="3.5" y="13.5" width="7" height="7" rx="1.5" />
+            <rect x="13.5" y="13.5" width="7" height="7" rx="1.5" />
+          </svg>
+          Overview
+        </a>
+
+        <a class="nav-link" href="#tasks">
+          <svg viewBox="0 0 24 24">
+            <path d="M8 6h12M8 12h12M8 18h12" />
+            <path d="m3.5 6 .8.8L6 5m-2.5 7 .8.8L6 11m-2.5 7 .8.8L6 17" />
+          </svg>
+          Tasks
+          <span class="nav-count" id="nav-task-count">—</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="bot-card">
+          <div class="bot-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 3v2m-6 2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z" />
+              <path d="M8 12h.01M16 12h.01M9 16h6" />
+            </svg>
+          </div>
+
+          <div>
+            <strong id="integration-title">Team updates</strong>
+            <span id="integration-state">Checking integrations…</span>
+          </div>
+
+          <span class="online-dot" aria-label="Connected"></span>
+        </div>
+
+        <div class="user-profile">
+          <div class="avatar">TP</div>
+
+          <div class="user-copy">
+            <strong>Team workspace</strong>
+            <span>Project team</span>
+          </div>
+
+          <svg class="more-icon" viewBox="0 0 24 24">
+            <circle cx="5" cy="12" r="1" />
+            <circle cx="12" cy="12" r="1" />
+            <circle cx="19" cy="12" r="1" />
+          </svg>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main dashboard -->
+    <main class="main-content" id="overview">
+      <header class="topbar">
+        <div class="breadcrumbs">
+          <span>Workspace</span>
+          <span class="crumb-slash">/</span>
+          <strong>Project overview</strong>
+        </div>
+
+        <div class="topbar-right">
+          <span class="live-indicator"><i></i>Live project data</span>
+          <div class="top-avatar" aria-label="Team workspace">TP</div>
+        </div>
+      </header>
+
+      <div class="page-wrap">
+
+        <!-- Page heading -->
+        <section class="page-heading">
+          <div>
+            <div class="eyebrow">
+              <span class="eyebrow-line"></span>
+              YOUR TEAM, IN SYNC
+            </div>
+
+            <h1>
+              Project overview<span class="heading-period">.</span>
+            </h1>
+
+            <p class="page-subtitle">
+              Report progress, review AI suggestions, and keep every team decision visible.
+            </p>
+          </div>
+
+          <button class="refresh-button" id="refresh-button" type="button">
+            <svg viewBox="0 0 24 24">
+              <path d="M20 7v5h-5M4 17v-5h5" />
+              <path d="M5.6 9a7 7 0 0 1 11.6-2L20 12M4 12l2.8 5a7 7 0 0 0 11.6-2" />
+            </svg>
+            <span>Refresh</span>
+          </button>
+        </section>
+
+        <!-- Task summary cards -->
+        <section class="summary-grid" aria-label="Task counts by status">
+
+          <article class="summary-card total-card">
+            <div class="card-top">
+              <span class="card-label">TOTAL TASKS</span>
+              <span class="metric-icon total-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M8 5h11v15H5V8l3-3Z" />
+                  <path d="M8 5v3H5m4 4h7m-7 4h7" />
+                </svg>
+              </span>
+            </div>
+            <div class="metric-row">
+              <strong class="metric-value" id="count-total">—</strong>
+              <span class="metric-note">across your project</span>
+            </div>
+            <div class="metric-rule"><i id="total-rule"></i></div>
+          </article>
+
+          <article class="summary-card pending-card">
+            <div class="card-top">
+              <span class="card-label">PENDING</span>
+              <span class="metric-icon pending-icon">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="8.5" />
+                  <path d="M12 7.5v4.8l3 1.8" />
+                </svg>
+              </span>
+            </div>
+            <div class="metric-row">
+              <strong class="metric-value" id="count-pending">—</strong>
+              <span class="metric-note">ready to get moving</span>
+            </div>
+            <div class="metric-rule"><i id="pending-rule"></i></div>
+          </article>
+
+          <article class="summary-card progress-card">
+            <div class="card-top">
+              <span class="card-label">IN PROGRESS</span>
+              <span class="metric-icon progress-icon">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="8.5" />
+                  <path d="M12 7v5l3.5 2" />
+                </svg>
+              </span>
+            </div>
+            <div class="metric-row">
+              <strong class="metric-value" id="count-progress">—</strong>
+              <span class="metric-note">moving forward</span>
+            </div>
+            <div class="metric-rule"><i id="progress-rule"></i></div>
+          </article>
+
+          <article class="summary-card blocked-card">
+            <div class="card-top">
+              <span class="card-label">BLOCKED</span>
+              <span class="metric-icon blocked-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 3.5 21 20H3l9-16.5Z" />
+                  <path d="M12 9v4.5m0 3h.01" />
+                </svg>
+              </span>
+            </div>
+            <div class="metric-row">
+              <strong class="metric-value" id="count-blocked">—</strong>
+              <span class="metric-note">need attention</span>
+            </div>
+            <div class="metric-rule"><i id="blocked-rule"></i></div>
+          </article>
+
+          <article class="summary-card complete-card">
+            <div class="card-top">
+              <span class="card-label">COMPLETE</span>
+              <span class="metric-icon complete-icon">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="8.5" />
+                  <path d="m8 12 2.7 2.7L16.5 9" />
+                </svg>
+              </span>
+            </div>
+            <div class="metric-row">
+              <strong class="metric-value" id="count-complete">—</strong>
+              <span class="metric-note">across the finish line</span>
+            </div>
+            <div class="metric-rule"><i id="complete-rule"></i></div>
+          </article>
+
+        </section>
+
+        <section class="command-center" id="command-center" aria-labelledby="command-heading">
+          <div class="command-heading">
+            <div>
+              <span class="section-kicker">PROJECT COMMAND CENTER</span>
+              <h2 id="command-heading">Progress, reviewed together</h2>
+              <p>Reports are analyzed by Gemini when configured. Ownership and deadline changes wait for the project owner.</p>
+            </div>
+            <div class="approval-count"><strong id="approval-count">—</strong><span>pending approvals</span></div>
+          </div>
+
+          <form class="progress-form" id="progress-form">
+            <div class="profile-fields">
+              <label for="profile-select">Your demo profile</label>
+              <select id="profile-select" name="profileId" required aria-describedby="profile-notice"></select>
+              <p id="profile-notice">Profile selection is for demonstration and is not secure authentication.</p>
+            </div>
+            <label class="report-field" for="progress-report">Report progress</label>
+            <textarea id="progress-report" name="message" rows="3" maxlength="2000" placeholder="Example: Payment API is blocked while we wait for test credentials. The delay puts integration at risk; I can use the staging sandbox in the meantime." required></textarea>
+            <div class="form-actions">
+              <span id="ai-availability" role="status" aria-live="polite">Checking AI availability…</span>
+              <button class="primary-button" id="progress-submit" type="submit">Analyze report</button>
+            </div>
+          </form>
+
+          <div class="command-grid">
+            <section class="command-card" aria-labelledby="approvals-heading">
+              <div class="command-card-heading"><div><span class="section-kicker">OWNER REVIEW</span><h3 id="approvals-heading">Pending approvals</h3></div></div>
+              <div id="approval-list" class="approval-list" aria-live="polite"><p class="muted-state">Loading approvals…</p></div>
+            </section>
+            <section class="command-card" aria-labelledby="blockers-heading">
+              <div class="command-card-heading"><div><span class="section-kicker">RECOVERY PLAN</span><h3 id="blockers-heading">Latest blocker analysis</h3></div></div>
+              <div id="blocker-list" class="blocker-list" aria-live="polite"><p class="muted-state">No blocker analysis yet.</p></div>
+            </section>
+          </div>
+
+          <section class="command-card timeline-card" aria-labelledby="timeline-heading">
+            <div class="command-card-heading"><div><span class="section-kicker">SERVER REPORTED EVENTS</span><h3 id="timeline-heading">Activity timeline</h3></div><button class="quiet-button" type="button" id="refresh-activity">Refresh activity</button></div>
+            <ol class="activity-list" id="activity-list" aria-live="polite"><li class="muted-state">Loading activity…</li></ol>
+          </section>
+        </section>
+
+        <!-- Team tasks -->
+        <section class="tasks-panel" id="tasks" aria-labelledby="tasks-heading">
+          <div class="panel-heading">
+            <div>
+              <div class="panel-title-row">
+                <h2 id="tasks-heading">Team tasks</h2>
+                <span class="task-total-pill" id="visible-task-count">Loading</span>
+              </div>
+              <p>Track ownership and keep every deliverable moving.</p>
+            </div>
+
+            <label class="filter-control">
+              <span>Filter</span>
+              <select id="status-filter" aria-label="Filter tasks by status">
+                <option value="All">All statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Blocked">Blocked</option>
+                <option value="Complete">Complete</option>
+              </select>
+              <svg viewBox="0 0 24 24">
+                <path d="m7 10 5 5 5-5" />
+              </svg>
+            </label>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col" class="task-col">TASK</th>
+                  <th scope="col" class="owner-col">OWNER</th>
+                  <th scope="col" class="status-col">STATUS</th>
+                  <th scope="col" class="action-col">
+                    <span class="sr-only">Update status</span>
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody id="task-rows">
+                <tr>
+                  <td colspan="4">
+                    <div class="loading-state">
+                      <span class="spinner"></span>
+                      <span>Loading your team’s tasks…</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="panel-footer">
+            <span id="last-updated">Connecting to your project</span>
+            <span><i class="footer-dot"></i>Synced with TeamPilot API</span>
+          </div>
+        </section>
+
+        <div class="feedback" id="feedback" role="status" aria-live="polite" hidden></div>
+
+        <footer class="page-footer">
+          <span>Made for teams that make things happen.</span>
+          <span>TEAMPILOT AI <b>·</b> PROJECT COORDINATION</span>
+        </footer>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Floating AI chat widget -->
+  <details class="ai-chat-widget" id="ai-assistant">
+    <summary
+      class="ai-chat-launcher"
+      aria-label="Open TeamPilot project summary"
+    >
+      <span class="ai-chat-launcher-icon" aria-hidden="true">✦</span>
+      <span>Project summary</span>
+      <span class="ai-chat-online-dot" aria-hidden="true"></span>
+    </summary>
+
+    <section class="ai-chat-window" aria-labelledby="ai-heading">
+      <header class="ai-chat-header">
+        <div class="ai-chat-avatar" aria-hidden="true">✦</div>
+
+        <div class="ai-chat-heading">
+          <h2 id="ai-heading">TeamPilot project summary</h2>
+          <p>
+            <span class="ai-chat-online-dot"></span>
+            Saved task data
+          </p>
+        </div>
+
+        <span class="ai-chat-powered">DATA</span>
+      </header>
+
+      <div
+        id="ai-chat-messages"
+        class="ai-chat-messages"
+        role="log"
+        aria-live="polite"
+        aria-label="Chat conversation"
+      >
+        <p class="ai-chat-welcome">
+          Hi there! 👋<br />
+          I can summarize saved task statuses. To have Gemini review a progress report, use the report form in the command center.
+        </p>
+      </div>
+
+      <form id="ai-chat-form" class="ai-chat-form">
+        <label for="ai-chat-input" class="sr-only">
+          Message the AI assistant
+        </label>
+
+        <input
+          id="ai-chat-input"
+          name="message"
+          type="text"
+          placeholder="Ask about your project..."
+          maxlength="1000"
+          autocomplete="off"
+          required
+        />
+
+        <button
+          type="submit"
+          id="ai-chat-send"
+          aria-label="Send message"
+        >➤</button>
+      </form>
+
+      <p
+        id="ai-chat-feedback"
+        class="ai-chat-feedback"
+        role="status"
+        aria-live="polite"
+      ></p>
+    </section>
+  </details>
+</body>
+</html>

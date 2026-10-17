@@ -1,2 +1,17 @@
 .env
+.env.*
+!.env.example
+
 node_modules/
+
+data/
+*.bak
+*.tmp
+*.log
+
+debug-error.txt
+debug-out.txt
+debug-server.cjs
+gemini-test.cjs
+server-error.txt
+server-log.txt
